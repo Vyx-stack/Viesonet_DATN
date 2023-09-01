@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.viesonet.AuthConfig;
 import com.viesonet.dao.AccountsDao;
 import com.viesonet.dao.UsersDao;
 import com.viesonet.entity.Accounts;
 import com.viesonet.entity.Roles;
 import com.viesonet.entity.Users;
+import com.viesonet.security.AuthConfig;
 import com.viesonet.service.AccountsService;
 import com.viesonet.service.SessionService;
 import com.viesonet.service.UsersService;

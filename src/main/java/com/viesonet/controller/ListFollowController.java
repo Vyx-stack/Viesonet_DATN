@@ -26,12 +26,12 @@ import com.viesonet.service.UsersService;
 
 import jakarta.websocket.server.PathParam;
 
-import com.viesonet.AuthConfig;
 import com.viesonet.dao.UsersDao;
 import com.viesonet.entity.Accounts;
 import com.viesonet.entity.Follow;
 import com.viesonet.entity.FollowDTO;
 import com.viesonet.entity.Users;
+import com.viesonet.security.AuthConfig;
 
 @RestController
 public class ListFollowController {

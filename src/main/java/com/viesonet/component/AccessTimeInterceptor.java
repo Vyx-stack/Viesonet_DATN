@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.viesonet.AuthConfig;
 import com.viesonet.entity.Accounts;
+import com.viesonet.security.AuthConfig;
 import com.viesonet.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

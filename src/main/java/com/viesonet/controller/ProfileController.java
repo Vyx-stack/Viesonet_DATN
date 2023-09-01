@@ -30,7 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.viesonet.AuthConfig;
 import com.viesonet.dao.FollowDao;
 import com.viesonet.dao.UsersDao;
 import com.viesonet.entity.AccountAndFollow;
@@ -43,6 +42,7 @@ import com.viesonet.entity.UserInformation;
 import com.viesonet.entity.Users;
 import com.viesonet.entity.ViolationTypes;
 import com.viesonet.entity.Violations;
+import com.viesonet.security.AuthConfig;
 import com.viesonet.service.AccountsService;
 import com.viesonet.service.FavoritesService;
 import com.viesonet.service.FollowService;

@@ -32,12 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.viesonet.AuthConfig;
 import com.viesonet.entity.Accounts;
 import com.viesonet.entity.Message;
 import com.viesonet.entity.MessageRequest;
 import com.viesonet.entity.UserMessage;
 import com.viesonet.entity.Users;
+import com.viesonet.security.AuthConfig;
 import com.viesonet.service.MessageService;
 import com.viesonet.service.SessionService;
 import com.viesonet.service.UsersService;

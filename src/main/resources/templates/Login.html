@@ -174,5 +174,39 @@ span.psw {
 	</div>
 	<link rel="stylesheet" href="/css/style.css">
 </body>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		const loginForm = document.getElementById("loginForm");
+		const messageDiv = document.getElementById("message");
 
+		loginForm.addEventListener("submit", function(event) {
+			event.preventDefault();
+
+			const formData = new FormData(loginForm);
+			const username = formData.get("username");
+			const password = formData.get("password");
+
+			fetch("/api/loginProgress", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: username,
+					password: password
+				})
+			})
+			.then(response => response.json())
+			.then(data => {
+				// Xử lý kết quả trả về từ server (token)
+				console.log("Token:", data.token);
+				messageDiv.textContent = "Đăng nhập thành công!";
+			})
+			.catch(error => {
+				console.error("Lỗi:", error);
+				messageDiv.textContent = "Thông tin đăng nhập không đúng!";
+			});
+		});
+	});
+</script>
 </html>
