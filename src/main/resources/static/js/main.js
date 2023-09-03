@@ -22,6 +22,18 @@ app.config(function($translateProvider, $routeProvider) {
 		templateUrl: "/ngview/profile.html",
 		controller: 'ProfileController'
 	})
+<<<<<<< Updated upstream
+=======
+	.when('/product', {
+		templateUrl: "/ngview/productDetails.html",
+		controller: 'ProductController'
+	})
+	.when('/favouriteProduct', {
+		templateUrl: "/ngview/favouriteProducts.html",
+		controller: 'FavouriteProductsController'
+	})
+	
+>>>>>>> Stashed changes
 	;
 	// Set the default language
 	var storedLanguage = localStorage.getItem('myAppLangKey') || 'vie';
