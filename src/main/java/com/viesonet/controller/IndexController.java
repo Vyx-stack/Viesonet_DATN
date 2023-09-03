@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -122,34 +121,15 @@ public class IndexController {
 	private AuthConfig authConfig;
 
 	@GetMapping("/findfollowing")
-	public List<Users> getFollowingInfoByUserId(Authentication authentication) {
+	public List<Posts> getFollowsByFollowingId(Authentication authentication) {
 		Accounts account = authConfig.getLoggedInAccount(authentication);
-		String userId = account.getUserId();
-		return followService.getFollowingInfoByUserId(userId);
-	}
 
-	@GetMapping("/get-more-posts/{page}")
-	public List<Posts> getMoreFollowedPosts(@PathVariable("page") int page, Authentication authentication) {
-		int postsPerPage = 10;
-		int startIndex = (page - 1) * postsPerPage;
-		int endIndex = startIndex + postsPerPage;
-
-		Accounts account = authConfig.getLoggedInAccount(authentication);
 		String userId = account.getUserId();
 		List<Follow> followList = followService.getFollowing(userId);
-		List<String> followedUserIds = followList.stream()
-				.map(follow -> follow.getFollowing().getUserId())
-				.collect(Collectors.toList());
-
-		List<Posts> allFollowedPosts = postsService.findPostsByListUserId(followedUserIds); // Thay vì lấy toàn bộ bài
-																							// viết, chỉ lấy bài viết
-																							// của người được theo dõi
-
-		if (startIndex >= allFollowedPosts.size()) {
-			return Collections.emptyList();
-		}
-
-		return allFollowedPosts.subList(startIndex, Math.min(endIndex, allFollowedPosts.size()));
+		List<String> listUserId = followList.stream().map(follow -> {
+			return follow.getFollowing().getUserId();
+		}).collect(Collectors.toList());
+		return postsService.findPostsByListUserId(listUserId);
 	}
 
 	@ResponseBody
@@ -164,8 +144,11 @@ public class IndexController {
 	@ResponseBody
 	@GetMapping("/findmyaccount")
 	public AccountAndFollow findMyAccount(Authentication authentication) {
+
 		Accounts account = authConfig.getLoggedInAccount(authentication);
+
 		String userId = account.getUserId();
+
 		return followService.getFollowingFollower(usersService.findUserById(userId));
 	}
 
@@ -340,6 +323,7 @@ public class IndexController {
 	@GetMapping("/loadallnotification")
 	public List<Notifications> getAllNotification(Authentication authentication) {
 		Accounts account = authConfig.getLoggedInAccount(authentication);
+
 		String userId = account.getUserId();
 		return notificationsService.findAllByReceiver(userId); // Implement hàm này để lấy thông báo từ CSDL
 	}
@@ -362,14 +346,14 @@ public class IndexController {
 		return modelAndView;
 	}
 
-	// @GetMapping("/logout")
-	// public ModelAndView logout() {
-	// session.remove("id");
-	// session.remove("role");
-	// cookieService.delete("user");
-	// cookieService.delete("pass");
-	// return new ModelAndView("redirect:/login");
-	// }
+//	@GetMapping("/logout")
+//	public ModelAndView logout() {
+//		session.remove("id");
+//		session.remove("role");
+//		cookieService.delete("user");
+//		cookieService.delete("pass");
+//		return new ModelAndView("redirect:/login");
+//	}
 
 	@GetMapping("/getviolations")
 	public List<ViolationTypes> getViolations() {
